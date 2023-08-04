@@ -1,39 +1,28 @@
 {
   "name": "kekstagram",
-  "version": "13.0.0",
+  "version": "1.0.0",
   "private": true,
   "description": "Личный проект «Кекстаграм» от HTML Academy",
   "repository": {
     "type": "git",
-    "url": "git@github.com:svetlana-sayganova/kekstagram.git"
+    "url": "{{sshUrl}}"
   },
-  "author": "Svetlana Sayganova",
   "bugs": {
-    "url": "https://github.com/svetlana-sayganova/kekstagram/issues"
+    "url": "{{bugsUrl}}"
   },
   "devDependencies": {
-    "babel-cli": "^6.26.0",
-    "babel-core": "^6.26.3",
-    "babel-loader": "^7.1.5",
-    "babel-polyfill": "^6.26.0",
-    "babel-preset-env": "^1.7.0",
-    "copy-webpack-plugin": "^4.5.2",
-    "eslint": "4.16.0",
-    "eslint-config-htmlacademy": "0.4.x",
-    "webpack": "^4.20.2",
-    "webpack-cli": "^3.1.2",
-    "webpack-dev-server": "^3.1.9"
+    "browser-sync": "2.26.14",
+    "eslint": "7.18.0",
+    "eslint-config-htmlacademy": "4.0.0"
   },
   "license": "MIT",
   "dependencies": {},
   "scripts": {
-    "test": "eslint js/",
-    "build": "webpack --mode production",
-    "dev": "webpack --mode development",
-    "watch": "webpack --mode development --watch",
-    "start": "webpack-dev-server --mode development --open"
+    "start": "browser-sync start --server --no-ui --files \"js/**/*.js\"",
+    "test": "eslint js/"
   },
   "engines": {
-    "node": "8.9"
+    "node": "14.x",
+    "npm": "6.x"
   }
 }
