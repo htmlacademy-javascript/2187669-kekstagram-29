@@ -1,9 +1,9 @@
 import * as preview from './preview';
 
 // Шаблон для фотографии пользователя
-const template = document.querySelector(`#picture`)
+const template = document.querySelector('#picture')
     .content
-    .querySelector(`.picture__link`);
+    .querySelector('.picture__link');
 
 export default /**
  * Формирует объект типа `Фотография` и метод для создания
@@ -27,16 +27,16 @@ class Photo {
    */
   create() {
     const photo = template.cloneNode(true);
-    const photoSource = photo.querySelector(`.picture__img`);
-    const photoComments = photo.querySelector(`.picture__stat--comments`);
-    const photoLikes = photo.querySelector(`.picture__stat--likes`);
+    const photoSource = photo.querySelector('.picture__img');
+    const photoComments = photo.querySelector('.picture__stat--comments');
+    const photoLikes = photo.querySelector('.picture__stat--likes');
 
     photoSource.src = this.url;
     photoComments.textContent = this.comments.length;
     photoLikes.textContent = this.likes;
 
     // При нажатии на DOM-элемент `Фотография` открывается его полноэкранная версия
-    photo.addEventListener(`click`, () => {
+    photo.addEventListener('click', () => {
       preview.open(this);
     });
 

@@ -1,9 +1,9 @@
 import * as util from './util.js';
 
-const uploadForm = document.querySelector(`.img-upload__form`);
-const hashTagsField = uploadForm.querySelector(`.text__hashtags`);
-const commentField = uploadForm.querySelector(`.text__description`);
-const submitButton = uploadForm.querySelector(`.img-upload__submit`);
+const uploadForm = document.querySelector('.img-upload__form');
+const hashTagsField = uploadForm.querySelector('.text__hashtags');
+const commentField = uploadForm.querySelector('.text__description');
+const submitButton = uploadForm.querySelector('.img-upload__submit');
 
 const HashTag = {
   SYMBOL: `#`,
@@ -13,7 +13,7 @@ const HashTag = {
 };
 
 const COMMENT_MAX_SIZE = 140;
-const ERROR_STYLE = `2px solid #ff0000`;
+const ERROR_STYLE = '2px solid #ff0000';
 
 /**
  * Выделяет неверно заполненные поля
@@ -41,23 +41,23 @@ const checkActions = [
     check: (arg) => arg.length === 0
   },
   {
-    message: `Хэш-тэгов должно быть не более ${HashTag.AMOUNT}`,
+    message: 'Хэш-тэгов должно быть не более ${HashTag.AMOUNT}',
     check: (arg) => arg.length > HashTag.AMOUNT
   },
   {
-    message: `Хэш-тэг должен начинаться с #`,
+    message: 'Хэш-тэг должен начинаться с #',
     check: (arg) => arg.some((value) => value[0] !== HashTag.SYMBOL)
   },
   {
-    message: `Хэш-тэг должен состоять минимум из ${HashTag.MIN_SIZE} символов`,
+    message: 'Хэш-тэг должен состоять минимум из ${HashTag.MIN_SIZE} символов',
     check: (arg) => arg.some((value) => value.length < HashTag.MIN_SIZE)
   },
   {
-    message: `Хэш-тэг не должен превышать ${HashTag.MAX_SIZE} символов`,
+    message: 'Хэш-тэг не должен превышать ${HashTag.MAX_SIZE} символов',
     check: (arg) => arg.some((value) => value.length > HashTag.MAX_SIZE)
   },
   {
-    message: `Хэш-тэги должны быть уникальными`,
+    message: 'Хэш-тэги должны быть уникальными',
     check: (arg) => arg.some((value, index, arr) => arr.indexOf(value) !== index)
   },
   {
@@ -85,8 +85,8 @@ const getCheckAction = (arg) => checkActions.find(({check}) => check(arg));
  * @return {Array}
  */
 const getHashTagsArray = (str) => {
-  const arr = str.split(` `).map(((value) => value.toLowerCase()));
-  return util.getArrayWithoutElement(arr, ``);
+  const arr = str.split(' ').map(((value) => value.toLowerCase()));
+  return util.getArrayWithoutElement(arr, '');
 };
 
 /**
@@ -128,7 +128,7 @@ const checkComment = (data) => {
  */
 const clearCustomValidity = (...fields) => {
   fields.forEach((field) => {
-    field.addEventListener(`input`, () => {
+    field.addEventListener('input', () => {
       field.setCustomValidity(``);
     });
   });
@@ -141,16 +141,16 @@ export /**
 const initialize = () => {
   clearCustomValidity(hashTagsField, commentField);
 
-  submitButton.addEventListener(`click`, () => {
+  submitButton.addEventListener('click', () => {
     checkHashTags(hashTagsField.value);
     checkComment(commentField.value);
   });
 
-  uploadForm.addEventListener(`invalid`, function (evt) {
+  uploadForm.addEventListener('invalid', function (evt) {
     setErrorValidStyle(evt.target);
   }, true);
 
-  uploadForm.addEventListener(`input`, function (evt) {
+  uploadForm.addEventListener('input', function (evt) {
     resetErrorValidStyle(evt.target);
   });
 };

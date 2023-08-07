@@ -1,8 +1,8 @@
 import * as gallery from './gallery.js';
 import * as util from './util.js';
 
-const filtersContainer = document.querySelector(`.img-filters`);
-const filters = filtersContainer.querySelectorAll(`.img-filters__button`);
+const filtersContainer = document.querySelector('.img-filters');
+const filters = filtersContainer.querySelectorAll('.img-filters__button');
 const DEBOUNCE_INTERVAL = 500;
 
 let currentFilter;
@@ -15,9 +15,9 @@ let currentFilter;
  */
 const setCurrentFilter = (filter) => {
   if (currentFilter) {
-    currentFilter.classList.remove(`img-filters__button--active`);
+    currentFilter.classList.remove('img-filters__button--active');
   }
-  filter.classList.add(`img-filters__button--active`);
+  filter.classList.add('img-filters__button--active');
   currentFilter = filter;
 };
 
@@ -83,10 +83,10 @@ export /**
  * @param {Array.<Photo>} photos
  */
 const initialize = (photos) => {
-  filtersContainer.classList.remove(`img-filters--inactive`);
+  filtersContainer.classList.remove('img-filters--inactive');
   currentFilter = filters[0];
   Array.from(filters).forEach((filter) =>
-    filter.addEventListener(`click`, (evt) => {
+    filter.addEventListener('click', (evt) => {
       filterPhotos(evt, photos);
     })
   );

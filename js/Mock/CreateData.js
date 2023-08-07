@@ -39,7 +39,7 @@ const createData = (obj) => {
     data.push({
       id: i,
       url: `photos/${i}.jpg`,
-      description: `Какое-то описание для фотографии`,
+      description: 'Какое-то описание для фотографии',
       likes: getRandomInteger(min, max),
       comments: getComments(obj),
     });

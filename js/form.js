@@ -5,23 +5,23 @@ import * as backend from './backend.js';
 import * as validation from './form-validation';
 import uploadFile from './upload-file.js';
 
-const bodyElement = document.querySelector(`body`);
-const uploadButton = document.querySelector(`#upload-file`);
-const uploadForm = document.querySelector(`.img-upload__form`);
-const hashTagsField = uploadForm.querySelector(`.text__hashtags`);
-const commentField = uploadForm.querySelector(`.text__description`);
+const bodyElement = document.querySelector('body');
+const uploadButton = document.querySelector('#upload-file');
+const uploadForm = document.querySelector('.img-upload__form');
+const hashTagsField = uploadForm.querySelector('.text__hashtags');
+const commentField = uploadForm.querySelector('.text__description');
 
-const editPanel = document.querySelector(`.img-upload__overlay`);
-const editPanelClose = editPanel.querySelector(`#upload-cancel`);
+const editPanel = document.querySelector('.img-upload__overlay');
+const editPanelClose = editPanel.querySelector('#upload-cancel');
 
-const uploadErrorBLock = uploadForm.querySelector(`.img-upload__message--error`);
-const uploadErrorMessage = uploadErrorBLock.querySelector(`.error__message`);
+const uploadErrorBLock = uploadForm.querySelector('.img-upload__message--error');
+const uploadErrorMessage = uploadErrorBLock.querySelector('.error__message');
 
-const uploadedPicture = editPanel.querySelector(`.img-upload__preview > img`);
-const effectsPreviews = editPanel.querySelectorAll(`.effects__preview`);
-const uploadMessage = uploadForm.querySelector(`.img-upload__message--loading`);
+const uploadedPicture = editPanel.querySelector('.img-upload__preview > img');
+const effectsPreviews = editPanel.querySelectorAll('.effects__preview');
+const uploadMessage = uploadForm.querySelector('.img-upload__message--loading');
 
-const FILE_TYPES = [`gif`, `jpg`, `jpeg`, `png`];
+const FILE_TYPES = ['gif', 'jpg', 'jpeg', 'png'];
 
 /**
  * При успешной отправке формы очищает ее поля
@@ -41,7 +41,7 @@ const onSuccessUpload = () => {
  */
 const onErrorUpload = (message) => {
   onEditPanelCloseClick();
-  uploadErrorBLock.classList.remove(`hidden`);
+  uploadErrorBLock.classList.remove('hidden');
   uploadErrorMessage.textContent = message;
 };
 
@@ -67,10 +67,10 @@ const onEditPanelCloseClick = () => {
   uploadButton.value = ``;
   resize.finalize();
   effects.finalize();
-  bodyElement.classList.remove(`modal-open`);
-  editPanel.classList.add(`hidden`);
-  editPanelClose.removeEventListener(`click`, onEditPanelCloseClick);
-  document.removeEventListener(`keydown`, onEditPanelEscPress);
+  bodyElement.classList.remove('modal-open');
+  editPanel.classList.add('hidden');
+  editPanelClose.removeEventListener('click', onEditPanelCloseClick);
+  document.removeEventListener('keydown', onEditPanelEscPress);
 };
 
 /**
@@ -95,11 +95,11 @@ const openUploadForm = () => {
   validation.initialize();
   resize.initialize();
   effects.initialize();
-  bodyElement.classList.add(`modal-open`);
-  editPanel.classList.remove(`hidden`);
-  editPanelClose.addEventListener(`click`, onEditPanelCloseClick);
-  document.addEventListener(`keydown`, onEditPanelEscPress);
-  uploadForm.addEventListener(`submit`, onUploadFormSubmit);
+  bodyElement.classList.add('modal-open');
+  editPanel.classList.remove('hidden');
+  editPanelClose.addEventListener('click', onEditPanelCloseClick);
+  document.addEventListener('keydown', onEditPanelEscPress);
+  uploadForm.addEventListener('submit', onUploadFormSubmit);
 };
 
 export /**
@@ -108,7 +108,7 @@ export /**
  * @param {Event} evt
  */
 const initialize = (evt) => {
-  uploadMessage.classList.remove(`hidden`);
+  uploadMessage.classList.remove('hidden');
   const file = evt.target.files[0];
 
   // Результат чтения загруженной фотографии помещает в атрибут
@@ -117,10 +117,10 @@ const initialize = (evt) => {
   uploadFile(file, FILE_TYPES, (readingResult) => {
     uploadedPicture.src = readingResult;
     Array.from(effectsPreviews).forEach((effect) => {
-      effect.style.backgroundImage = `url(${readingResult})`;
+      effect.style.backgroundImage = 'url(${readingResult})';
     });
 
     openUploadForm();
-    uploadMessage.classList.add(`hidden`);
+    uploadMessage.classList.add('hidden');
   });
 };

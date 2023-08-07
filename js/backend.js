@@ -1,13 +1,13 @@
 
-const URL = `https://js.dump.academy/kekstagram`;
+const URL = 'https://js.dump.academy/kekstagram';
 const SUCCESS_STATUS = 200;
 const REQUEST_TIMEOUT = 5000;
 
 const ErrorStatus = {
-  400: `Неверный запрос`,
-  401: `Пользователь не авторизован`,
-  404: `Ничего на найдено`,
-  500: `Внутренняя ошибка сервера`
+  400: 'Неверный запрос',
+  401: 'Пользователь не авторизован',
+  404: 'Ничего на найдено',
+  500: 'Внутренняя ошибка сервера'
 };
 
 /**
@@ -20,9 +20,9 @@ const ErrorStatus = {
 const createRequest = (onSuccess, onError) => {
   const xhr = new XMLHttpRequest();
 
-  xhr.responseType = `json`;
+  xhr.responseType = 'json';
 
-  xhr.addEventListener(`load`, () => {
+  xhr.addEventListener('load', () => {
     if (xhr.status === SUCCESS_STATUS) {
       onSuccess(xhr.response);
     } else {
@@ -30,11 +30,11 @@ const createRequest = (onSuccess, onError) => {
     }
   });
 
-  xhr.addEventListener(`error`, () =>
-    onError(`Произошла ошибка соединения`));
+  xhr.addEventListener('error', () =>
+    onError('Произошла ошибка соединения'));
 
-  xhr.addEventListener(`timeout`, () =>
-    onError(`Запрос не успел выполниться за ${xhr.timeout} мс`));
+  xhr.addEventListener('timeout', () =>
+    onError('Запрос не успел выполниться за ${xhr.timeout} мс'));
 
   xhr.timeout = REQUEST_TIMEOUT;
 
@@ -50,7 +50,7 @@ export /**
 const load = (onSuccess, onError) => {
   const xhr = createRequest(onSuccess, onError);
 
-  xhr.open(`GET`, `${URL}/data`);
+  xhr.open('GET', '${URL}/data');
   xhr.send();
 };
 
@@ -64,6 +64,6 @@ export /**
 const upload = (data, onSuccess, onError) => {
   const xhr = createRequest(onSuccess, onError);
 
-  xhr.open(`POST`, URL);
+  xhr.open('POST', URL);
   xhr.send(data);
 };

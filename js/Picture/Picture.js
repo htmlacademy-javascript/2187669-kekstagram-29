@@ -1,7 +1,7 @@
 import {showBigPicture} from '../BigPicture/BigPicture.js';
 
 const getPicture = (obj) => {
-  const picture  = document.querySelector('#picture').content.querySelector('.picture');
+  const picture = document.querySelector('#picture').content.querySelector('.picture');
 
   const template = picture.cloneNode(true);
   template.querySelector('.picture__img').src = obj.url;
