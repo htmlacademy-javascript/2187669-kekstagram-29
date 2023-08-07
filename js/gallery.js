@@ -4,18 +4,18 @@ import * as backend from './backend.js';
 import * as filter from './filter.js';
 
 // DOM-элемент, в котором размещаются фотографии пользователей
-const container = document.querySelector(`.pictures`);
+const container = document.querySelector('.pictures');
 
 // Форма загрузки изображения
-const uploadForm = document.querySelector(`.img-upload__form`);
+const uploadForm = document.querySelector('.img-upload__form');
 
 // Кнопка загрузки изображения
-const uploadButton = uploadForm.querySelector(`#upload-file`);
+const uploadButton = uploadForm.querySelector('#upload-file');
 
 // Поп-ап для вывода возможной ошибки при загрузке и его элементы
-const errorPopup = document.querySelector(`.error-popup`);
-const errorPopupClose = errorPopup.querySelector(`.error-popup__cancel`);
-const errorPopupMessage = errorPopup.querySelector(`.error-popup__message`);
+const errorPopup = document.querySelector('.error-popup');
+const errorPopupClose = errorPopup.querySelector('.error-popup__cancel');
+const errorPopupMessage = errorPopup.querySelector('.error-popup__message');
 
 const POPAP_ERROR_INTERVAL = 5000;
 
@@ -72,8 +72,8 @@ const onSuccess = (data) => {
  *
  */
 const onErrorPopupCloseClick = () => {
-  errorPopup.classList.add(`hidden`);
-  errorPopupClose.removeEventListener(`click`, onErrorPopupCloseClick);
+  errorPopup.classList.add('hidden');
+  errorPopupClose.removeEventListener('click', onErrorPopupCloseClick);
 };
 
 /**
@@ -82,11 +82,11 @@ const onErrorPopupCloseClick = () => {
  * @param {string} message
  */
 const onError = (message) => {
-  if (errorPopup.classList.contains(`hidden`)) {
-    errorPopup.classList.remove(`hidden`);
+  if (errorPopup.classList.contains('hidden')) {
+    errorPopup.classList.remove('hidden');
     errorPopupMessage.textContent = message;
     setTimeout(onErrorPopupCloseClick, POPAP_ERROR_INTERVAL);
-    errorPopupClose.addEventListener(`click`, onErrorPopupCloseClick);
+    errorPopupClose.addEventListener('click', onErrorPopupCloseClick);
   }
 };
 
@@ -101,7 +101,7 @@ const initialize = () => {
 
   // Инициирует работу с загруженной фотографией
   // при нажатии на кнопку uploadButton
-  uploadButton.addEventListener(`change`, form.initialize);
+  uploadButton.addEventListener('change', form.initialize);
 };
 
 initialize();

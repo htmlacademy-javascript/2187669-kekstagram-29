@@ -39,25 +39,19 @@ const validationForm = () => {
 
   const validationHashTag = (str) => {
     const RE = /^#[A-Za-zА-Яа-яЁё0-9]{1,19}$/;
-    let messageError = '';
 
-    if (str[0] !== '#') {
-      messageError = 'хэш-тег начинается с символа # (решётка)';
-    } else {
-      if (str.length > 20) {
-        messageError = 'Максимальная длина одного хэш-тега 20 символов, включая решётку';
-      } else if (str.length === 1) {
-        messageError = 'хеш-тег не может состоять только из одной решётки';
-      } else {
-        if (!RE.test(str)) {
-          messageError = 'строка после решётки должна состоять из букв и чисел и не может содержать пробелы, спецсимволы (#, @, $ и т. п.), символы пунктуации (тире, дефис, запятая и т. п.), эмодзи и т. д.;';
-        } else {
-          messageError = '';
-        }
-      }
+    if (str.length > 20) {
+        return 'Максимальная длина одного хэш-тега 20 символов, включая решётку';
     }
-    return messageError;
-  };
+    else if (str.length === 1) {
+        return 'хеш-тег не может состоять только из одной решётки';
+    }
+    else if (!RE.test(str)) {
+        return 'строка после решётки должна состоять из букв и чисел и не может содержать пробелы, спецсимволы (#, @, $ и т. п.), символы пунктуации (тире, дефис, запятая и т. п.), эмодзи и т. д.;';
+    }
+
+    return '';
+};
 
   const validationHashTags = () => {
     const hashTagArr = textHashTags.value.toLowerCase().split(' ');

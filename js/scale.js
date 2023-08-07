@@ -1,9 +1,9 @@
-const editPanel = document.querySelector(`.img-upload__overlay`);
-const scalePanel = editPanel.querySelector(`.scale`);
-const effectLevel = scalePanel.querySelector(`.scale__value`);
-const scalePin = scalePanel.querySelector(`.scale__pin`);
-const scaleLevel = scalePanel.querySelector(`.scale__level`);
-const scaleLine = scalePanel.querySelector(`.scale__line`);
+const editPanel = document.querySelector('.img-upload__overlay');
+const scalePanel = editPanel.querySelector('.scale');
+const effectLevel = scalePanel.querySelector('.scale__value');
+const scalePin = scalePanel.querySelector('.scale__pin');
+const scaleLevel = scalePanel.querySelector('.scale__level');
+const scaleLine = scalePanel.querySelector('.scale__line');
 const EFFECT_MAX_LEVEL = 100;
 let pin;
 
@@ -13,8 +13,8 @@ export /**
  *
  */
 const hide = () => {
-  scalePanel.classList.add(`hidden`);
-  scalePin.removeEventListener(`mousedown`, onScalePinMouseDown);
+  scalePanel.classList.add('hidden');
+  scalePin.removeEventListener('mousedown', onScalePinMouseDown);
 };
 
 export /**
@@ -23,9 +23,9 @@ export /**
  *
  */
 const show = () => {
-  if (scalePanel.classList.contains(`hidden`)) {
-    scalePanel.classList.remove(`hidden`);
-    scalePin.addEventListener(`mousedown`, onScalePinMouseDown);
+  if (scalePanel.classList.contains('hidden')) {
+    scalePanel.classList.remove('hidden');
+    scalePin.addEventListener('mousedown', onScalePinMouseDown);
   }
 };
 
@@ -67,8 +67,8 @@ const onScalePinMouseDown = (evt) => {
 
   let startCoord = evt.clientX;
 
-  scalePin.style.cursor = `none`;
-  document.documentElement.style.cursor = `none`;
+  scalePin.style.cursor = 'none';
+  document.documentElement.style.cursor = 'none';
 
   const onMouseMove = (moveEvt) => {
     moveEvt.preventDefault();
@@ -93,13 +93,13 @@ const onScalePinMouseDown = (evt) => {
   const onMouseUp = (upEvt) => {
     upEvt.preventDefault();
 
-    scalePin.style.cursor = `move`;
-    document.documentElement.style.cursor = `auto`;
+    scalePin.style.cursor = 'move';
+    document.documentElement.style.cursor = 'auto';
 
-    document.removeEventListener(`mousemove`, onMouseMove);
-    document.removeEventListener(`mouseup`, onMouseUp);
+    document.removeEventListener('mousemove', onMouseMove);
+    document.removeEventListener('mouseup', onMouseUp);
   };
 
-  document.addEventListener(`mousemove`, onMouseMove);
-  document.addEventListener(`mouseup`, onMouseUp);
+  document.addEventListener('mousemove', onMouseMove);
+  document.addEventListener('mouseup', onMouseUp);
 };

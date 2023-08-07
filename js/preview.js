@@ -1,16 +1,16 @@
 import * as util from './util';
 
-const bodyElement = document.querySelector(`body`);
-const preview = document.querySelector(`.big-picture`);
-const previewClose = preview.querySelector(`.cancel`);
-const previewImage = preview.querySelector(`.big-picture__img`)
+const bodyElement = document.querySelector('body');
+const preview = document.querySelector('.big-picture');
+const previewClose = preview.querySelector('.cancel');
+const previewImage = preview.querySelector('.big-picture__img')
     .querySelector(`img`);
-const commentsCountBlock = preview.querySelector(`.social__comment-count`);
-const commentsLoadMoreButton = preview.querySelector(`.social__comment-loadmore`);
-const commentsLoaded = preview.querySelector(`.comments-loaded`);
-const previewCaption = preview.querySelector(`.social__caption`);
-const previewLikes = preview.querySelector(`.likes-count`);
-const previewCommentsBlock = preview.querySelector(`.social__comments`);
+const commentsCountBlock = preview.querySelector('.social__comment-count');
+const commentsLoadMoreButton = preview.querySelector('.social__comment-loadmore');
+const commentsLoaded = preview.querySelector('.comments-loaded');
+const previewCaption = preview.querySelector('.social__caption');
+const previewLikes = preview.querySelector('.likes-count');
+const previewCommentsBlock = preview.querySelector('.social__comments');
 const COMMENTS_STEP = 5;
 
 let comments = [];
@@ -46,7 +46,7 @@ const showCommentsLoadedCount = (count) => {
 const renderComments = (commentsArray) => {
   const commentsBlockElements = commentsArray
       .map((comment) => createCommentTemplate(comment));
-  previewCommentsBlock.insertAdjacentHTML(`beforeend`, commentsBlockElements.join(``));
+  previewCommentsBlock.insertAdjacentHTML('beforeend', commentsBlockElements.join(``));
   commentsCounter += commentsArray.length;
   showCommentsLoadedCount(commentsCounter);
 };
@@ -79,9 +79,9 @@ const onCommentsLoadMoreButtonEnterPress = (evt) => {
  *
  */
 const showCommentsLoadMoreButton = () => {
-  commentsLoadMoreButton.classList.remove(`hidden`);
-  commentsLoadMoreButton.addEventListener(`click`, onCommentsLoadMoreButtonClick);
-  commentsLoadMoreButton.addEventListener(`keydown`, onCommentsLoadMoreButtonEnterPress);
+  commentsLoadMoreButton.classList.remove('hidden');
+  commentsLoadMoreButton.addEventListener('click', onCommentsLoadMoreButtonClick);
+  commentsLoadMoreButton.addEventListener('keydown', onCommentsLoadMoreButtonEnterPress);
 };
 
 /**
@@ -90,9 +90,9 @@ const showCommentsLoadMoreButton = () => {
  *
  */
 const hideCommentsLoadMoreButton = () => {
-  commentsLoadMoreButton.classList.add(`hidden`);
-  commentsLoadMoreButton.removeEventListener(`click`, onCommentsLoadMoreButtonClick);
-  commentsLoadMoreButton.removeEventListener(`keydown`, onCommentsLoadMoreButtonEnterPress);
+  commentsLoadMoreButton.classList.add('hidden');
+  commentsLoadMoreButton.removeEventListener('click', onCommentsLoadMoreButtonClick);
+  commentsLoadMoreButton.removeEventListener('keydown', onCommentsLoadMoreButtonEnterPress);
 };
 
 /**
@@ -101,7 +101,7 @@ const hideCommentsLoadMoreButton = () => {
  *
  */
 const showCommentsCountBlock = () => {
-  commentsCountBlock.classList.remove(`hidden`);
+  commentsCountBlock.classList.remove('hidden');
   renderComments(comments.splice(0, COMMENTS_STEP));
 };
 
@@ -110,7 +110,7 @@ const showCommentsCountBlock = () => {
  *
  */
 const hideCommentsCountBlock = () => {
-  commentsCountBlock.classList.add(`hidden`);
+  commentsCountBlock.classList.add('hidden');
 };
 
 /**
@@ -126,7 +126,7 @@ const fillPreview = (photoData) => {
   util.removeChildren(previewCommentsBlock);
 
   comments = photoData.comments.slice();
-  commentsCountBlock.querySelector(`.comments-count`).textContent = comments.length;
+  commentsCountBlock.querySelector('.comments-count').textContent = comments.length;
 
   showCommentsCountBlock();
 
@@ -146,11 +146,11 @@ const fillPreview = (photoData) => {
 const onPreviewCloseClick = () => {
   comments = [];
   commentsCounter = 0;
-  bodyElement.classList.remove(`modal-open`);
-  preview.classList.add(`hidden`);
+  bodyElement.classList.remove('modal-open');
+  preview.classList.add('hidden');
   hideCommentsCountBlock();
-  previewClose.removeEventListener(`click`, onPreviewCloseClick);
-  document.removeEventListener(`keydown`, onPreviewEscPress);
+  previewClose.removeEventListener('click', onPreviewCloseClick);
+  document.removeEventListener('keydown', onPreviewEscPress);
 };
 
 /**
@@ -168,9 +168,9 @@ export /**
  * @param {Object} photoData
  */
 const open = (photoData) => {
-  bodyElement.classList.add(`modal-open`);
-  preview.classList.remove(`hidden`);
-  previewClose.addEventListener(`click`, onPreviewCloseClick);
-  document.addEventListener(`keydown`, onPreviewEscPress);
+  bodyElement.classList.add('modal-open');
+  preview.classList.remove('hidden');
+  previewClose.addEventListener('click', onPreviewCloseClick);
+  document.addEventListener('keydown', onPreviewEscPress);
   fillPreview(photoData);
 };

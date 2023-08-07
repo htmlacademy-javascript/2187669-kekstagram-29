@@ -17,7 +17,7 @@ export default
     if (matches) {
       const reader = new FileReader();
 
-      reader.addEventListener(`load`, () => {
+      reader.addEventListener('load', () => {
         cb(reader.result);
       });
 

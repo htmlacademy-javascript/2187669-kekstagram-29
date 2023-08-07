@@ -1,12 +1,12 @@
 import * as scale from './scale.js';
 
-const editPanel = document.querySelector(`.img-upload__overlay`);
-const scalePanel = editPanel.querySelector(`.scale`);
-const effectLevel = scalePanel.querySelector(`.scale__value`);
-const effectPanel = editPanel.querySelector(`.effects`);
-const effectToggles = effectPanel.querySelectorAll(`.effects__radio`);
-const defaultEffect = effectPanel.querySelector(`#effect-none`);
-const uploadedPicture = editPanel.querySelector(`.img-upload__preview > img`);
+const editPanel = document.querySelector('.img-upload__overlay');
+const scalePanel = editPanel.querySelector('.scale');
+const effectLevel = scalePanel.querySelector('.scale__value');
+const effectPanel = editPanel.querySelector('.effects');
+const effectToggles = effectPanel.querySelectorAll('.effects__radio');
+const defaultEffect = effectPanel.querySelector('#effect-none');
+const uploadedPicture = editPanel.querySelector('.img-upload__preview > img');
 
 const EFFECT_MAX_LEVEL = 100;
 
@@ -14,32 +14,32 @@ const effects = {
   chrome: {
     min: 0,
     max: 1,
-    setFilter: (value) => `grayscale(${value})`
+    setFilter: (value) => 'grayscale(${value})'
   },
   sepia: {
     min: 0,
     max: 1,
-    setFilter: (value) => `sepia(${value})`
+    setFilter: (value) => 'sepia(${value})'
   },
   marvin: {
     min: 0,
     max: 100,
-    setFilter: (value) => `invert(${value}%)`
+    setFilter: (value) => 'invert(${value}%)'
   },
   phobos: {
     min: 0,
     max: 3,
-    setFilter: (value) => `blur(${value}px)`
+    setFilter: (value) => 'blur(${value}px)'
   },
   heat: {
     min: 1,
     max: 3,
-    setFilter: (value) => `brightness(${value})`
+    setFilter: (value) => 'brightness(${value})'
   },
   none: {
     min: 0,
     max: 0,
-    setFilter: () => `none`
+    setFilter: () => 'none'
   }
 };
 
@@ -55,8 +55,8 @@ const setPictureClass = (effectName) => {
   if (currentPictureClass) {
     uploadedPicture.classList.remove(currentPictureClass);
   }
-  uploadedPicture.classList.add(`effects__preview--${effectName}`);
-  currentPictureClass = `effects__preview--${effectName}`;
+  uploadedPicture.classList.add('effects__preview--${effectName}');
+  currentPictureClass = 'effects__preview--${effectName}';
 };
 
 /**
@@ -112,7 +112,7 @@ export /**
  */
 const initialize = () => {
   Array.from(effectToggles).forEach((effectToggle) =>
-    effectToggle.addEventListener(`click`, onEffectToggleClick));
+    effectToggle.addEventListener('click', onEffectToggleClick));
   defaultEffect.checked = true;
   setPictureClass(defaultEffect.value);
   setPictureEffect(defaultEffect.value);
@@ -125,5 +125,5 @@ export /**
  */
 const finalize = () => {
   Array.from(effectToggles).forEach((effectToggle) =>
-    effectToggle.removeEventListener(`click`, onEffectToggleClick));
+    effectToggle.removeEventListener('click', onEffectToggleClick));
 };

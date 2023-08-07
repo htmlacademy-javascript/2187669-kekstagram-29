@@ -1,8 +1,8 @@
-const uploadForm = document.querySelector(`.img-upload__form`);
-const resizeMinus = uploadForm.querySelector(`.resize__control--minus`);
-const resizePlus = uploadForm.querySelector(`.resize__control--plus`);
-const resizeValue = uploadForm.querySelector(`.resize__control--value`);
-const picturePreview = uploadForm.querySelector(`.img-upload__preview`);
+const uploadForm = document.querySelector('.img-upload__form');
+const resizeMinus = uploadForm.querySelector('.resize__control--minus');
+const resizePlus = uploadForm.querySelector('.resize__control--plus');
+const resizeValue = uploadForm.querySelector('.resize__control--value');
+const picturePreview = uploadForm.querySelector('.img-upload__preview');
 
 const PictureSize = {
   MIN: 25,
@@ -22,7 +22,7 @@ let currentPictureSize = 100;
  */
 const setPictureSize = (size) => {
   resizeValue.value = `${size}%`;
-  picturePreview.style = `transform: scale(${size / 100})`;
+  picturePreview.style = 'transform: scale(${size / 100})';
   currentPictureSize = size;
 };
 
@@ -57,8 +57,8 @@ export /**
  */
 const initialize = () => {
   setPictureSize(PictureSize.DEFAULT);
-  resizeMinus.addEventListener(`click`, onResizeMinusClick);
-  resizePlus.addEventListener(`click`, onResizePlusClick);
+  resizeMinus.addEventListener('click', onResizeMinusClick);
+  resizePlus.addEventListener('click', onResizePlusClick);
 };
 
 export /**
@@ -66,6 +66,6 @@ export /**
  *
  */
 const finalize = () => {
-  resizeMinus.removeEventListener(`click`, onResizeMinusClick);
-  resizePlus.removeEventListener(`click`, onResizePlusClick);
+  resizeMinus.removeEventListener('click', onResizeMinusClick);
+  resizePlus.removeEventListener('click', onResizePlusClick);
 };
