@@ -3,21 +3,9 @@ import {activeSlider, destroySlider} from '../Slider/slider.js';
 import {clearFormItem, validationForm} from '../Validation/Validation.js';
 import {sendData} from '../NetworkData/NetworkData.js';
 
-const uploadFile = document.querySelector('#upload-file');
-const imgUploadForm = document.querySelector('.img-upload__form');
-const imgUploadOverlay = document.querySelector('.img-upload__overlay');
-const imgUploadPreviewContainer = document.querySelector('.img-upload__preview-container');
-const imgUploadEffectLevel = document.querySelector('.img-upload__effect-level');
-const scaleControlValue = document.querySelector('.scale__control--value');
-const effectLevelSlider = document.querySelector('.effect-level__slider');
-const effectsList = document.querySelector('.effects__list');
-const effectLevelElement = document.querySelector('.effect-level__value');
-const imgPreview = document.querySelector('.img-upload__preview img');
 const STEP_RESIZE = 25;
 const MIN_PREVIEW_SIZE = 25;
 const MAX_PREVIEW_SIZE = 100;
-const imgUploadCancel = document.querySelector('.img-upload__cancel');
-
 const FILTER_RANGE = {
   chrome: {
     start: 0,
@@ -46,37 +34,32 @@ const FILTER_RANGE = {
   },
 };
 
+const uploadFile = document.querySelector('#upload-file');
+const imgUploadForm = document.querySelector('.img-upload__form');
+const imgUploadOverlay = document.querySelector('.img-upload__overlay');
+const imgUploadPreviewContainer = document.querySelector('.img-upload__preview-container');
+const imgUploadEffectLevel = document.querySelector('.img-upload__effect-level');
+const scaleControlValue = document.querySelector('.scale__control--value');
+const effectLevelSlider = document.querySelector('.effect-level__slider');
+const effectsList = document.querySelector('.effects__list');
+const effectLevelElement = document.querySelector('.effect-level__value');
+const imgPreview = document.querySelector('.img-upload__preview img');
+const imgUploadCancel = document.querySelector('.img-upload__cancel');
+
 const resizePreview = (evt) => {
   let currentValue = parseInt(scaleControlValue.value, 10);
 
   if (evt.target.closest('.scale__control--bigger')) {
-    currentValue >= MAX_PREVIEW_SIZE ? MAX_PREVIEW_SIZE : currentValue += STEP_RESIZE;
+    currentValue >= MAX_PREVIEW_SIZE ? currentValue = MAX_PREVIEW_SIZE : currentValue += STEP_RESIZE;
   }
 
   if (evt.target.closest('.scale__control--smaller')) {
-    currentValue <= MIN_PREVIEW_SIZE ? MIN_PREVIEW_SIZE : currentValue -= STEP_RESIZE;
+    currentValue <= MIN_PREVIEW_SIZE ? currentValue = MIN_PREVIEW_SIZE : currentValue -= STEP_RESIZE;
   }
 
   scaleControlValue.value = `${currentValue}%`;
   scaleControlValue.currentValue = `${currentValue}%`;
   imgPreview.style.transform = `scale(${currentValue / 100})`;
-};
-
-const closeOverlay = () => {
-  imgUploadOverlay.classList.add('hidden');
-  imgUploadPreviewContainer.removeEventListener('click', resizePreview);
-
-  uploadFile.value = '';
-  uploadFile.currentValue = '';
-  document.removeEventListener('keydown', onCloseUploadEscPress);
-  imgUploadCancel.removeEventListener('click', closeOverlay);
-  effectsList.removeEventListener('click', onSelectEffect);
-};
-
-const onCloseUploadEscPress = (evt) => {
-  if(isEscapeKey(evt)) {
-    closeOverlay();
-  }
 };
 
 const effectPreview = (effect) => {
@@ -93,10 +76,27 @@ const effectPreview = (effect) => {
   }
 };
 
-const onSelectEffect = (evt)=> {
+const onSelectEffect = (evt) => {
   if (evt.target.closest('input')) {
     effectPreview(evt.target.closest('input').value);
   }
+};
+
+const closeOverlay = () => {
+  imgUploadOverlay.classList.add('hidden');
+  imgUploadPreviewContainer.removeEventListener('click', resizePreview);
+
+  uploadFile.value = '';
+  uploadFile.currentValue = '';
+  imgUploadCancel.removeEventListener('click', closeOverlay);
+  effectsList.removeEventListener('click', onSelectEffect);
+};
+
+const onCloseUploadEscPress = (evt) => {
+  if (isEscapeKey(evt)) {
+    closeOverlay();
+  }
+  document.removeEventListener('keydown', onCloseUploadEscPress, true);
 };
 
 const updatePreviewEffect = (effect, value) => {
@@ -135,7 +135,7 @@ const openUploadOverlay = () => {
 
   validationForm();
 
-  document.addEventListener('keydown', onCloseUploadEscPress);
+  document.addEventListener('keydown', onCloseUploadEscPress, true);
   imgUploadCancel.addEventListener('click', closeOverlay);
 
   imgUploadForm.addEventListener('keydown', clearFormItem);
@@ -156,4 +156,4 @@ const setPictureFormSubmit = (onSuccess, onError) => {
 
 uploadFile.addEventListener('change', openUploadOverlay);
 
-export {closeOverlay, effectPreview, updatePreviewEffect, setPictureFormSubmit};
+export {closeOverlay, onCloseUploadEscPress, effectPreview, updatePreviewEffect, setPictureFormSubmit};
