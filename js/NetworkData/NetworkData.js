@@ -20,7 +20,7 @@ const sendData = (onSuccess, onError, body) => {
     body,
   })
     .then((response) => {
-      if(response.ok) {
+      if (response.ok) {
         onSuccess();
       } else {
         onError();

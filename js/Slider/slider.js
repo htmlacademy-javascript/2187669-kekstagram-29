@@ -9,7 +9,7 @@ const getCurrentEffect = () => {
   let classNameEffect;
   classNameEffect = 'none';
 
-  if(imgPreview.hasAttribute('class')) {
+  if (imgPreview.hasAttribute('class')) {
     classNameEffect = imgPreview.className.slice(imgPreview.className.lastIndexOf('-') + 1);
   }
 
