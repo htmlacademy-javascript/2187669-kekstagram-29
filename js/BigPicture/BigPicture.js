@@ -1,20 +1,21 @@
 import {isEscapeKey} from '../Utils/Utils.js';
 import {comments} from '../Comments/Comments.js';
 
-const bigPicture = document.querySelector('.big-picture');
-const body = document.body;
 const COMMENT_COUNT = 5;
 
-const showBigPicture = (obj) => {
-  bigPicture.classList.remove('hidden');
-  body.classList.add('modal-open');
+const bigPicture = document.querySelector('.big-picture');
+const body = document.body;
 
+const showBigPicture = (obj) => {
   const cancelBigPicture = bigPicture.querySelector('.cancel');
   const commentsLoader = bigPicture.querySelector('.comments-loader');
   const currentCommentsCount = bigPicture.querySelector('.current-comments-count');
   const commentsCount = bigPicture.querySelector('.comments-count');
   let currentCommentsCountInt = parseInt(currentCommentsCount.textContent, 10);
   const commentsCountInt = obj.comments.length;
+
+  bigPicture.classList.remove('hidden');
+  body.classList.add('modal-open');
 
   if (currentCommentsCountInt >= commentsCountInt) {
     currentCommentsCountInt = commentsCountInt;
@@ -28,7 +29,7 @@ const showBigPicture = (obj) => {
 
   bigPicture.querySelector('.big-picture__img img').src = obj.url;
   bigPicture.querySelector('.likes-count').textContent = obj.likes;
-  commentsCount.textContent = commentsCountInt;
+  commentsCount.textContent = String(commentsCountInt);
   bigPicture.querySelector('.social__caption').textContent = obj.description;
 
   comments(obj.comments, currentCommentsCountInt);
@@ -49,9 +50,8 @@ const showBigPicture = (obj) => {
     evt.preventDefault();
     bigPicture.classList.add('hidden');
     body.classList.remove('modal-open');
-    document.removeEventListener('keydown', closeBigPictureEscKeydown);
     commentsLoader.classList.remove('hidden');
-    currentCommentsCount.textContent = COMMENT_COUNT;
+    currentCommentsCount.textContent = String(COMMENT_COUNT);
     comments(obj.comments, currentCommentsCountInt);
   };
 
@@ -59,10 +59,14 @@ const showBigPicture = (obj) => {
     if (isEscapeKey(evt)) {
       closeBigPicture(evt);
     }
+    document.removeEventListener('keydown', closeBigPictureEscKeydown, true);
   };
 
-  document.addEventListener('keydown', closeBigPictureEscKeydown);
-  cancelBigPicture.addEventListener('click', closeBigPicture);
+  document.addEventListener('keydown', closeBigPictureEscKeydown, true);
+  cancelBigPicture.addEventListener('click', (evt) => {
+    closeBigPicture(evt);
+    document.removeEventListener('keydown', closeBigPictureEscKeydown);
+  });
 };
 
 export {showBigPicture};
