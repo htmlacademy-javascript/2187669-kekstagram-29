@@ -50,19 +50,11 @@ const resizePreview = (evt) => {
   let currentValue = parseInt(scaleControlValue.value, 10);
 
   if (evt.target.closest('.scale__control--bigger')) {
-
     currentValue = currentValue >= MAX_PREVIEW_SIZE ? MAX_PREVIEW_SIZE : currentValue + STEP_RESIZE;
   }
 
   if (evt.target.closest('.scale__control--smaller')) {
     currentValue = currentValue <= MIN_PREVIEW_SIZE ? MIN_PREVIEW_SIZE : currentValue - STEP_RESIZE;
-
-    currentValue >= MAX_PREVIEW_SIZE ? currentValue = MAX_PREVIEW_SIZE : currentValue += STEP_RESIZE;
-  }
-
-  if (evt.target.closest('.scale__control--smaller')) {
-    currentValue <= MIN_PREVIEW_SIZE ? currentValue = MIN_PREVIEW_SIZE : currentValue -= STEP_RESIZE;
-
   }
 
   scaleControlValue.value = `${currentValue}%`;
